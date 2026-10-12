@@ -1,108 +1,69 @@
-
 # Bangladesh Satellite Mission Simulation
 
-Hi! I’m Anannya, and this is my first hands-on space mission simulation project.  
-
-I’ve always dreamed of working with satellites, mission design, and space systems that have **real-world impact**. So I decided to start small by simulating a **satellite orbiting Earth** and analyzing **how often it would pass over Bangladesh**. This project is inspired by real-world satellite mission planning done by agencies like NASA and ESA.
-
----
+Python simulation of a circular low Earth orbit (LEO) satellite, with orbital parameter calculation, orbit visualization and a ground-track analysis of passes over Bangladesh.
 
 ## Objective
+- Compute key orbital parameters (velocity, period, orbits per day) for a 550 km circular orbit.
+- Visualize the orbit and its ground track.
+- Estimate when the satellite passes over Bangladesh, as a first step in Earth-observation mission planning.
 
-The goal of this project is to:
+## Model and assumptions
+| Parameter | Value |
+|---|---|
+| Orbit type | Circular LEO, two-body (Keplerian) |
+| Altitude | 550 km |
+| Earth radius | 6371 km |
+| Orbital radius (r) | 6921 km |
+| Gravitational parameter (mu) | 398600 km^3/s^2 |
+| Inclination | 97.6 deg (sun-synchronous value for this altitude) |
+| Target | Bangladesh centre, 23.685 N, 90.356 E |
 
-1. Simulate a **Low Earth Orbit (LEO) satellite**  
-2. Calculate key orbital parameters (velocity, period, altitude)  
-3. Visualize the satellite orbit around Earth  
-4. Analyze **ground track** to determine satellite passes over Bangladesh
+**Equations**
 
----
+Orbital velocity: `v = sqrt(mu / r)`
 
-## Methodology
-
-- **Orbit Type:** LEO, circular  
-- **Altitude:** 550 km above Earth  
-- **Earth Radius:** 6371 km  
-- **Orbital Radius (r):** 6921 km  
-- **Gravitational Parameter (μ):** 398600 km³/s²  
-- **Orbit Inclination:** 97.6° (typical sun-synchronous orbit)
-
-**Equations Used:**
-
-**1. Orbital Velocity:**  
-\[
-v = \sqrt{\frac{\mu}{r}}
-\]
-
-**2. Orbital Period:**  
-\[
-T = 2\pi \sqrt{\frac{r^3}{\mu}}
-\]
-
----
+Orbital period: `T = 2 * pi * sqrt(r^3 / mu)`
 
 ## Results
 
-**Orbital Parameters:**
-
+### Orbital parameters
 | Parameter | Value |
-|-----------|-------|
-| Orbital Radius | 6921 km |
-| Orbital Velocity | 7.59 km/s |
-| Orbital Period | 95 minutes |
-| Orbits per Day | ~15 |
+|---|---|
+| Orbital velocity | 7.59 km/s |
+| Orbital period | 95.5 min |
+| Orbits per day | about 15 |
 
-**Ground Track Analysis:**  
-The satellite passes over Bangladesh approximately at the following times during one orbit:
+### Ground-track analysis
+A "pass" is counted when the sub-satellite point falls within +/-2 deg latitude and longitude of the Bangladesh centre point.
 
-These passes are calculated with ±2° latitude and longitude tolerance around Bangladesh’s center (23.685° N, 90.356° E).
+| Pass | Time after start (min) | Latitude | Longitude |
+|---|---|---|---|
+| [fill from your script output] | | | |
 
-**Visualizations:**  
+> Paste the pass times your script produces. State the start epoch and the simulation duration used.
 
-- **Orbit Visualization:**  
-![Orbit Visualization](orbitpath.png)
+### Visualizations
+![Orbit visualization](orbit_visualization.png)
+![Ground track over Bangladesh](ground_track.png)
 
-- **Ground Track over Bangladesh:**  
-![Ground Track](groundtrack.png)
+## Limitations
+- **Two-body model only.** No J2 oblateness, atmospheric drag or other perturbations. A real sun-synchronous orbit depends on J2 precession, so the 97.6 deg inclination is used here as a given value, not derived by the model.
+- **Pass detection is crude.** A +/-2 deg box around one point is not a sensor footprint. It ignores swath width, elevation angle and ground-station visibility.
+- **Single day, single satellite.** No revisit statistics yet.
+- [Confirm and state whether Earth rotation is included in the ground track. It must be, or the track will repeat over the same longitude every orbit.]
 
-**Interpretation:**  
-- A LEO satellite completes ~15 orbits per day, providing multiple opportunities to pass over Bangladesh.  
-- Ground track analysis shows **specific time windows** for observation.  
-- This simulation demonstrates **how mission planners determine satellite coverage**, a fundamental step in Earth observation missions.
+## Run it
+```bash
+pip install numpy matplotlib
+pip install cartopy   # optional, for map plots
+python [your_script_name].py
+```
 
----
+## Next steps
+1. Replace the box test with a footprint test based on sensor field of view and Earth curvature.
+2. Simulate multiple days and report revisit time statistics.
+3. Add J2 perturbation and compare the ground track drift.
+4. Add payload constraints (swath width, resolution) and compare candidate altitudes.
 
-## Tools Used
-
-- **Python**: programming and calculations  
-- **NumPy**: numerical operations  
-- **Matplotlib**: orbit and ground track visualization  
-- **Cartopy (optional)**: enhanced mapping and geospatial plots
-
----
-
-## Next Steps
-
-1. Simulate **multiple orbits and days** to get full daily coverage  
-2. Model **satellite constellations** for more frequent coverage  
-3. Calculate **revisit times** and optimize orbit parameters  
-4. Introduce **payload constraints** (camera resolution, swath width)
-
----
-
-## Significance
-
-This project represents me as a **future space scientist**:
-
-- Passionate about aerospace and satellite systems  
-- Able to combine coding, physics, and engineering  
-- Thinking like a **mission analyst**  
-- Willing to start small and grow into bigger, real-world space research
-
-Even at this small scale, it mirrors **how real space missions are designed**: calculations → simulation → visualization → planning.
-
----
-
-*Let’s launch this tiny mission together, one orbit at a time.* 🚀
-
-
+## Tools
+Python, NumPy, Matplotlib, Cartopy (optional).
