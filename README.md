@@ -43,8 +43,9 @@ A "pass" is counted when the sub-satellite point falls within +/-2 deg latitude 
 > Paste the pass times your script produces. State the start epoch and the simulation duration used.
 
 ### Visualizations
-![Orbit visualization](orbit_visualization.png)
-![Ground track over Bangladesh](ground_track.png)
+![Orbit visualization]<img width="640" height="480" alt="orbitpath" src="https://github.com/user-attachments/assets/8c6817d3-150e-45db-aeb7-61090ce741b5" />
+
+![Ground track over Bangladesh]<img width="1000" height="500" alt="groundtrack" src="https://github.com/user-attachments/assets/57b3f476-5b3e-4423-917f-35f57fc2e2d5" />
 
 ## Limitations
 - **Two-body model only.** No J2 oblateness, atmospheric drag or other perturbations. A real sun-synchronous orbit depends on J2 precession, so the 97.6 deg inclination is used here as a given value, not derived by the model.
